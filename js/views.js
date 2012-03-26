@@ -1,52 +1,42 @@
 var SquareView = Backbone.View.extend({
     tagName: 'input',
     className: 'square',
+    model: Square,
     initialize: function () {
-        this.model.on('change', this.darken, this)
-    },
-    events: {
-        'click': 'darken'
-    },
-    darken: function () {
-        console.log('Darkened the input');
-        this.$el.css('background-color','#CCC');
-    },
-    initialize: function () {
-        this.model.bind('change', this.render, this)
-    },
-    render: function () {
-        this.$el.css('color','red');
+        if(this.model.get('isUsed') === false) {
+            this.$el.addClass('notUsed');
+        }
     }
 });
 
 var PuzzleView = Backbone.View.extend({
-    el: $('.crossword'),
+    el: '.crossword',
+    model: function (config) {
+        return config.puzzle
+    },
+    initialize: function (config) {
+        var dummy = new Square(),
+            dummyView = new SquareView({model: dummy}),
+            i = 0,
+            j = 0;
 
-    events: {
-        'click': 'testEvent'
-    },
+        //Set this view's width to the width of the squares * the config.puzzleSize
+        this.$el.append(dummyView.$el.css('visibility','hidden'));
+        this.$el.width(dummyView.$el.width() * config.puzzleSize);
+        this.$el.empty();
 
-    testEvent: function () {
-        console.log('We bound an event! This is a controller');
-    },
-    createSquare: function () {
-        var square = new Square();
-        var view = new SquareView({model: square});
-        $('.crossword').append(view.$el);
-    },
-    createRedSquare: function () {
-        var square = new Square();
-        var view = new SquareView({model: square});
-        $('.crossword').append(view.$el);
-        square.set('color','red');
-    },
-    initialize: function () {
-        var button = $('<input type="button" value="Make Squares!" ></input>');
-        var changeButton = button.clone();
-        changeButton.attr('value', 'Make Red Squares, Mao!');
-        button.on('click', this.createSquare);
-        changeButton.on('click', this.createRedSquare);
-        $('body').append(button, changeButton);
+        //Create the correct number of square models and views
+        for (; i < config.puzzleSize; i++) {
+            var rowNum = i + 1;
+            for (j = 0; j < config.puzzleSize; j++) {
+                var colNum = j + 1,
+                    square = new Square({'row': rowNum, 'col': colNum}),
+                    squareView = new SquareView({'model': square});
+                //Add all models to the upper level config collection
+                config.allSquaresCollection.add(square);
+                //Apply the views to the PuzzleView
+                this.$el.append(squareView.$el)
+            }
+        }
     }
-
 });

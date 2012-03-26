@@ -1,9 +1,11 @@
 $(function () {
     var CrosswordController = {
         init: function () {
-            console.log('creating obj');
-            this.puzzleView = new PuzzleView();
-            console.log(this);
+            this.config = {
+                'puzzleSize': 15,
+                'allSquaresCollection': new Puzzle()
+            };
+            this.puzzleView = new PuzzleView(this.config);
             return this
         }
     }

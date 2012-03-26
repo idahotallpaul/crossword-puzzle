@@ -2,8 +2,10 @@ var Square = Backbone.Model.extend({
     defaults: function () {
         return {
             'value': '',
-            'color': 'black',
-            'readOnly': true
+            'isUsed': false,
+            'readOnly': true,
+            'col': 0,
+            'row': 0
         }
     }
 });
