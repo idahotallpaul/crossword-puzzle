@@ -19,10 +19,13 @@ var PuzzleView = Backbone.View.extend({
             dummyView = new SquareView({model: dummy}),
             i = 0,
             j = 0;
+        function calcBorderWidth(ele) {
+            return (parseInt(ele.css('borderLeftWidth')) + parseInt(ele.css('borderRightWidth')))
+        }
 
         //Set this view's width to the width of the squares * the config.puzzleSize
         this.$el.append(dummyView.$el.css('visibility','hidden'));
-        this.$el.width(dummyView.$el.width() * config.puzzleSize);
+        this.$el.width(((dummyView.$el.width() + calcBorderWidth(dummyView.$el)) * config.puzzleSize) + calcBorderWidth(this.$el));
         this.$el.empty();
 
         //Create the correct number of square models and views
