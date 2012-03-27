@@ -3,7 +3,6 @@ var Square = Backbone.Model.extend({
         return {
             'value': '',
             'isUsed': false,
-            'readOnly': true,
             'col': 0,
             'row': 0
         }

@@ -13,3 +13,7 @@ div.crossword input {
     margin: 0;
     font-size: 12px;
 }
+div.crossword input.notUsed {
+    background-color: #000;
+    cursor: default;
+}
