@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Api testing ground</h1>
+        <pre>jQuery.post("/puzzle", {
+  "puzzleSize": 15,
+  "clueArray": [
+                    0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,
+                    1,1,1,1,1,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,
+                    0,1,1,0,0,1,0,0,1,0,0,0,1,1,1,
+                    0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,
+                    1,1,1,1,1,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,
+                    0,1,1,0,0,1,0,0,1,0,0,0,1,1,1,
+                    0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,
+                    1,1,1,1,1,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,
+                    0,1,1,0,0,1,0,0,1,0,0,0,1,1,1,
+                    1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,
+                    1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,
+                    0,1,1,0,0,1,0,0,1,0,0,0,1,1,1
+                ]
+}, function (data, textStatus, jqXHR) {
+    console.log("Post resposne:"); console.dir(data); console.log(textStatus); console.dir(jqXHR);
+});</pre>
+        <pre>$.get("/puzzle/", function (data, textStatus, jqXHR) {
+    console.log("Get resposne:");
+    console.dir(data);
+    console.log(textStatus);
+    console.dir(jqXHR);
+});</pre>
+        <script src="javascripts/jquery-1.7.1.js"></script>
+    </body>
+</html>
