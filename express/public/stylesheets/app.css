@@ -1,0 +1,19 @@
+div.crossword {
+    border: 5px solid #CCC;
+    font-size: 0;
+}
+div.crossword input {
+    border: 1px solid black;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: blue;
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+}
+div.crossword input.notUsed {
+    background-color: #000;
+    cursor: default;
+}
