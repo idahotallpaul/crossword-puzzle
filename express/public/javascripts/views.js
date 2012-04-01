@@ -2,15 +2,26 @@ var SquareView = Backbone.View.extend({
     tagName: 'input',
     className: 'square',
     model: Square,
+    events: {
+        'blur': 'updateSquareVal'
+    },
     initialize: function () {
         this.paintSquare();
+        this.$el.attr('maxLength', 1);
     },
     paintSquare: function () {
         if(this.model.get('isUsed') === false) {
             this.$el.addClass('notUsed');
-            this.$el.attr('readonly','readonly');
+            this.$el.attr('disabled','disabled');
         } else if (this.model.get('isUsed') === true) {
             this.$el.addClass('isUsed');
+        }
+    },
+    updateSquareVal: function () {
+        var currentVal = this.$el.val();
+        if (currentVal && typeof currentVal === 'string') {
+            this.model.set('value', currentVal.toUpperCase());
+            //console.log(this.model.get('value'));
         }
     }
 });
