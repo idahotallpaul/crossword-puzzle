@@ -29,9 +29,6 @@ var SquareView = Backbone.View.extend({
 
 var PuzzleView = Backbone.View.extend({
     el: '.crossword',
-    model: function () {
-        return Crossword.config.puzzle
-    },
     initialize: function () {
         var dummy = new Square(),
             dummyView = new SquareView({model: dummy}),
@@ -47,29 +44,13 @@ var PuzzleView = Backbone.View.extend({
         this.$el.width(((dummyViewWidth + littleSquareWidth) * Crossword.config.puzzleSize));
         this.$el.empty();
 
-        //Create the correct number of square models and views
-        for (i = 0; i < Crossword.config.puzzleSize; i++) {
-            var rowNum = i;
-            for (j = 0; j < Crossword.config.puzzleSize; j++) {
-                var colNum = j,
-                    square = new Square({'row': rowNum, 'col': colNum}),
-                    squarePosition = ((rowNum) * Crossword.config.puzzleSize) + colNum;
+        //Loop through all squares in this Puzzle Collection and attach views
+        for (i = 0; i < Crossword.allSquares.length; i++) {
+            //Attach View to the square
+            var squareView = new SquareView({'model': Crossword.allSquares.models[i]});
 
-                //Check against the Crossword.config.boardArray is this is a dark or light square and set model accordingly
-                if (Crossword.config.boardArray[squarePosition] === 1) {
-                    square.set('isUsed', true);
-                    //square.set('value', square.get('row'));
-                }
-
-                //Attach View to the square
-                var squareView = new SquareView({'model': square});
-
-                //Add all models to the upper level puzzle collection
-                Crossword.allSquares.add(square);
-
-                //Apply the views to the PuzzleView
-                this.$el.append(squareView.$el)
-            }
+            //Apply the views to the PuzzleView
+            this.$el.append(squareView.$el)
         }
     }
 });
