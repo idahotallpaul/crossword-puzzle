@@ -8,6 +8,7 @@ var SquareView = Backbone.View.extend({
     initialize: function () {
         this.paintSquare();
         this.$el.attr('maxLength', 1);
+        this.$el.val(this.model.get('value'));
     },
     paintSquare: function () {
         if(this.model.get('isUsed') === false) {
@@ -46,8 +47,8 @@ var PuzzleView = Backbone.View.extend({
         this.$el.empty();
 
         //Create the correct number of square models and views
-        for (; i < config.puzzleSize; i++) {
-            var rowNum = i + 1;
+        for (i = 0; i < config.puzzleSize; i++) {
+            var rowNum = i;
             for (j = 0; j < config.puzzleSize; j++) {
                 var colNum = j,
                     square = new Square({'row': rowNum, 'col': colNum});
@@ -66,11 +67,12 @@ var PuzzleView = Backbone.View.extend({
         var rowVal = square.get('row'),
             colVal = square.get('col'),
             paintArray = config.clueArray,
-            squarePosition = 1 + (rowVal * config.puzzleSize) + colVal;
+            squarePosition = ((rowVal) * config.puzzleSize) + colVal;
 
         if (typeof rowVal == 'number' && typeof colVal == 'number') {
             if (paintArray[squarePosition] === 1) {
                 square.set('isUsed', true);
+                square.set('value', squarePosition);
             }
         }
     }
