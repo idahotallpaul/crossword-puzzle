@@ -8,8 +8,12 @@ var Word = Backbone.Collection.extend({
     colNum: '',
     rowNum: '',
     gatherSelf: function () {
-        if (this.orientation === 'across' && rowNum) {
+        if (this.orientation && this.colNum && this.rowNum) {
+            if (this.orientation === 'across') {
 
-        } else if (this.orientation === 'down' && colNum)
+            } else if (this.orientation === 'down' && this.colNum) {
+
+            }
+        }
     }
 });
