@@ -1,8 +1,7 @@
 $(function () {
     var config = {
         'puzzleSize': 15,
-        'allSquaresCollection': new Puzzle(),
-        'clueArray': [
+        'boardArray': [
             1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,
             1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,
             1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,
@@ -18,10 +17,11 @@ $(function () {
             1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,
             0,0,0,1,1,1,1,1,1,0,1,1,1,1,1,
             1,1,1,1,0,1,1,1,0,1,1,1,1,1,0
-        ]
-
+        ],
+        'clueArray': []
     }
     Crossword = {};
-    Crossword = new PuzzleView(config);
+    Crossword.allSquares = new Puzzle();
     Crossword.config = config;
+    Crossword.viewObj = new PuzzleView();
 });

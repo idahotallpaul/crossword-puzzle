@@ -8,7 +8,7 @@ var Word = Backbone.Collection.extend({
     colNum: '',
     rowNum: '',
     gatherSelf: function () {
-        if (this.orientation && this.colNum && this.rowNum) {
+        if (this.orientation && this.colNum && this.rowNum && Crossword.config) {
             if (this.orientation === 'across') {
 
             } else if (this.orientation === 'down' && this.colNum) {

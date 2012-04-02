@@ -29,50 +29,46 @@ var SquareView = Backbone.View.extend({
 
 var PuzzleView = Backbone.View.extend({
     el: '.crossword',
-    model: function (config) {
-        return config.puzzle
+    model: function () {
+        return Crossword.config.puzzle
     },
-    initialize: function (config) {
+    initialize: function () {
         var dummy = new Square(),
             dummyView = new SquareView({model: dummy}),
+            dummyViewWidth = '',
+            littleSquareWidth = '',
             i = 0,
             j = 0;
-        function calcBorderWidth(ele) {
-            return (parseInt(ele.css('borderLeftWidth')) + parseInt(ele.css('borderRightWidth')))
-        }
 
-        //Set this view's width to the width of the squares * the config.puzzleSize
+        //Set this view's width to the width of the squares * the Crossword.config.puzzleSize
         this.$el.append(dummyView.$el.css('visibility','hidden'));
-        this.$el.width(((dummyView.$el.width() + calcBorderWidth(dummyView.$el)) * config.puzzleSize));
+        dummyViewWidth = dummyView.$el.width();
+        littleSquareWidth = parseInt(dummyView.$el.css('borderLeftWidth')) + parseInt(dummyView.$el.css('borderRightWidth'));
+        this.$el.width(((dummyViewWidth + littleSquareWidth) * Crossword.config.puzzleSize));
         this.$el.empty();
 
         //Create the correct number of square models and views
-        for (i = 0; i < config.puzzleSize; i++) {
+        for (i = 0; i < Crossword.config.puzzleSize; i++) {
             var rowNum = i;
-            for (j = 0; j < config.puzzleSize; j++) {
+            for (j = 0; j < Crossword.config.puzzleSize; j++) {
                 var colNum = j,
-                    square = new Square({'row': rowNum, 'col': colNum});
-                //Check against the config is this is a dark or light square and set model accordingly
-                this.isUsedSquare(square, config);
-                //Attach View
+                    square = new Square({'row': rowNum, 'col': colNum}),
+                    squarePosition = ((rowNum) * Crossword.config.puzzleSize) + colNum;
+
+                //Check against the Crossword.config.boardArray is this is a dark or light square and set model accordingly
+                if (Crossword.config.boardArray[squarePosition] === 1) {
+                    square.set('isUsed', true);
+                    //square.set('value', square.get('row'));
+                }
+
+                //Attach View to the square
                 var squareView = new SquareView({'model': square});
-                //Add all models to the upper level config collection
-                config.allSquaresCollection.add(square);
+
+                //Add all models to the upper level puzzle collection
+                Crossword.allSquares.add(square);
+
                 //Apply the views to the PuzzleView
                 this.$el.append(squareView.$el)
-            }
-        }
-    },
-    isUsedSquare: function (square, config) {
-        var rowVal = square.get('row'),
-            colVal = square.get('col'),
-            paintArray = config.clueArray,
-            squarePosition = ((rowVal) * config.puzzleSize) + colVal;
-
-        if (typeof rowVal == 'number' && typeof colVal == 'number') {
-            if (paintArray[squarePosition] === 1) {
-                square.set('isUsed', true);
-                //square.set('value', square.get('col'));
             }
         }
     }
