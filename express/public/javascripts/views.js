@@ -72,7 +72,7 @@ var PuzzleView = Backbone.View.extend({
         if (typeof rowVal == 'number' && typeof colVal == 'number') {
             if (paintArray[squarePosition] === 1) {
                 square.set('isUsed', true);
-                square.set('value', squarePosition);
+                //square.set('value', square.get('col'));
             }
         }
     }
