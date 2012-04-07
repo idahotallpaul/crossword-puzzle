@@ -40,20 +40,33 @@ var Word = Backbone.Collection.extend({
         }
     }
 });
-var HintCollection = Backbone.Collection.extend({
+var acrossHintCollection = Backbone.Collection.extend({
     model: Hint,
-    orientation: 'across',
     initialize: function () {
-        if (this.orientation === 'across') {
-            for (i = 0; i < Crossword.config.hints.across.length; i++) {
-                this.add(new Hint(Crossword.config.hints.across[i]));
-            }
-        } else if (this.orientation === 'down') {
-            for (i = 0; i < Crossword.config.hints.down.length; i++) {
-                var a = new Hint(Crossword.config.hints.down[i]);
-                this.add(a);
-            }
+        var i = 0;
+        for (; i < Crossword.config.hints.across.length; i++) {
+            var aHint = {};
+            aHint = new Hint({
+                'text': Crossword.config.hints.across[i].text,
+                'answer': Crossword.config.hints.across[i].answer,
+                'startingCoords': Crossword.config.hints.across[i].startingCoords
+            });
+            this.add(aHint);
         }
-
+    }
+});
+var downHintCollection = Backbone.Collection.extend({
+    model: Hint,
+    initialize: function () {
+        var i = 0;
+        for (; i < Crossword.config.hints.down.length; i++) {
+            var aHint = {};
+            aHint = new Hint({
+                'text': Crossword.config.hints.down[i].text,
+                'answer': Crossword.config.hints.down[i].answer,
+                'startingCoords': Crossword.config.hints.down[i].startingCoords
+            });
+            this.add(aHint);
+        }
     }
 });

@@ -55,23 +55,29 @@ var PuzzleView = Backbone.View.extend({
     }
 });
 var HintView = Backbone.View.extend({
-    el: '',
-    orientation: 'across',
-    initialize: function () {
-        var i = 0;
+    'events': {
 
-        if (this.orientation == 'across') {
-            var acrossHints = new HintCollection({'orientation': 'across'});
-            for (; i < acrossHints.length; i++) {
-                var liTemplate = $('<li>').text(acrossHints.at(i).get('text'));
-                this.$el.append(liTemplate);
-            }
-        } else if (this.orientation == 'down') {
-            var downHints = new HintCollection({'orientation': 'down'});
-            for (; i < downHints.length; i++) {
-                var liTemplate = $('<li>').text(downHints[i]);
-                this.$el.append(liTemplate);
-            }
+    }
+});
+var downHintView = HintView.extend({
+    el: '',
+    initialize: function () {
+        var i = 0,
+            downHints = new downHintCollection();
+        for (; i < downHints.length; i++) {
+            var liTemplate = $('<li>').text(downHints.at(i).get('text'));
+            this.$el.append(liTemplate);
+        }
+    }
+});
+var acrossHintView = HintView.extend({
+    el: '',
+    initialize: function () {
+        var i = 0,
+            acrossHints = new acrossHintCollection();
+        for (; i < acrossHints.length; i++) {
+            var liTemplate = $('<li>').text(acrossHints.at(i).get('text'));
+            this.$el.append(liTemplate);
         }
     }
 });

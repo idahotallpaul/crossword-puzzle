@@ -61,6 +61,6 @@ $(function () {
     Crossword.config = config;
     Crossword.allSquares = new Puzzle();
     Crossword.viewObj = new PuzzleView();
-    Crossword.acrossHintView = new HintView({'el': '.acrossHints', 'orientation': 'across'});
-    Crossword.downHintView = new HintView({'el': '.downHints', 'orientation': 'down'});
+    Crossword.acrossHintView = new acrossHintView({'el': '.acrossHints'});
+    Crossword.downHintView = new downHintView({'el': '.downHints'});
 });

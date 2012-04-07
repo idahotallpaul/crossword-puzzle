@@ -9,15 +9,11 @@ var Square = Backbone.Model.extend({
     }
 });
 var Hint = Backbone.Model.extend({
-    defaults: function () {
-        return {
-            'text': 'Clue 2',
-            'answer': 'AAAAAAAA',
-            'startingCoords': {
-                'row': 0,
-                'col': 1
-            }
-        }
+    'text': '',
+    'answer': '',
+    'startingCoords': {
+        'row': 0,
+        'col': 0
     }
 });
 
