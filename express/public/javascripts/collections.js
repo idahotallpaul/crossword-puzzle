@@ -40,3 +40,20 @@ var Word = Backbone.Collection.extend({
         }
     }
 });
+var HintCollection = Backbone.Collection.extend({
+    model: Hint,
+    orientation: 'across',
+    initialize: function () {
+        if (this.orientation === 'across') {
+            for (i = 0; i < Crossword.config.hints.across.length; i++) {
+                this.add(new Hint(Crossword.config.hints.across[i]));
+            }
+        } else if (this.orientation === 'down') {
+            for (i = 0; i < Crossword.config.hints.down.length; i++) {
+                var a = new Hint(Crossword.config.hints.down[i]);
+                this.add(a);
+            }
+        }
+
+    }
+});

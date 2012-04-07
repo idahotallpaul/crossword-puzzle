@@ -22,20 +22,36 @@ $(function () {
             'across': [
                 {
                     'text': 'Clue 1',
-                    'answer': 'Answer',
+                    'answer': 'AAAAAA',
                     'startingCoords': {
                         'row': 0,
                         'col': 0
+                    }
+                },
+                {
+                    'text': 'Clue 2',
+                    'answer': 'AAA',
+                    'startingCoords': {
+                        'row': 0,
+                        'col': 7
                     }
                 }
             ],
             'down': [
                 {
-                    'text': 'Clue 6',
-                    'answer': 'Answer66',
+                    'text': 'Clue 1',
+                    'answer': 'AAA',
                     'startingCoords': {
                         'row': 0,
-                        'col': 2
+                        'col': 0
+                    }
+                },
+                {
+                    'text': 'Clue 2',
+                    'answer': 'AAAAAAAA',
+                    'startingCoords': {
+                        'row': 0,
+                        'col': 1
                     }
                 }
             ]
@@ -45,4 +61,6 @@ $(function () {
     Crossword.config = config;
     Crossword.allSquares = new Puzzle();
     Crossword.viewObj = new PuzzleView();
+    Crossword.acrossHintView = new HintView({'el': '.acrossHints', 'orientation': 'across'});
+    Crossword.downHintView = new HintView({'el': '.downHints', 'orientation': 'down'});
 });
