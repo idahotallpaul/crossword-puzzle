@@ -8,6 +8,7 @@ var Square = Backbone.Model.extend({
         }
     }
 });
+
 var Hint = Backbone.Model.extend({
     defaults: function () {
         return {

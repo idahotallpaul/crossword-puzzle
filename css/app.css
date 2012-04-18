@@ -12,6 +12,7 @@ div.crossword input {
     padding: 0;
     margin: 0;
     font-size: 12px;
+	text-align: center;
 }
 div.crossword input.notUsed {
     background-color: #000;
